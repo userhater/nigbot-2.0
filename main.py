@@ -184,10 +184,10 @@ def status_changer():
         if ordered:
             for i in statuses:
                 change_status("online", i)
-                time.sleep(8)
+                time.sleep(6)
         else:
             change_status("online", random.choice(ordered))
-            time.sleep(8)
+            time.sleep(6)
 
 status_thread = threading.Thread(target=status_changer)
 status_thread.start()
