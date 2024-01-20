@@ -1,5 +1,6 @@
 {
 	"token": "",
 	"bio": ["CHECK BIO", "SB COMMUNITY"],
-	"ordered": true
+	"ordered": true,
+	"statusswap": false
 }
