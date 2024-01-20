@@ -1,8 +1,9 @@
 # nigbot-2.0
 don't complaing about errors u have to do "pip install [package]" like "pip install requests" for example.
+⚠️this is beta and DOES HAVE BUGS. report them to me.⚠️
 
 - FREE!
-- BETA!
+- OPEN SOURCE!
 - DOESN'T USE DISCORD.PY! (THATS FOR SKIDS)
 - FAST START UP!
 - BUILT FOR RAIDS!
