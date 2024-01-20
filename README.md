@@ -4,7 +4,7 @@ don't complaing about errors u have to do "pip install [package]" like "pip inst
 
 - FREE!
 - OPEN SOURCE!
-- DOESN'T USE DISCORD.PY! (THATS FOR SKIDS)
+- DOESN'T USE DISCORD.PY/JS! (THATS FOR SKIDS)
 - FAST START UP!
 - BUILT FOR RAIDS!
 - BIG COMMUNITY AT https://discord.gg/mjAvsQcpWE
