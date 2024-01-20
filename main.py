@@ -3,6 +3,7 @@ import requests
 import json
 import time
 import random
+import concurrent.futures
 from datetime import datetime, timedelta
 from os import system
 
@@ -84,14 +85,31 @@ def delete_gc(guild_id):
     r = requests.delete(f"https://discord.com/api/v9/channels/{guild_id}?silent=true", headers=headers)
     return r
 
+def get_messages(channel_id, limit):
+    return requests.get(
+        f"https://discord.com/api/v9/channels/{channel_id}/messages?limit={limit}", headers=headers
+    ).json()
+
+def react_message(channel_id, message_id, emoji):
+    return requests.put(
+        f"https://discord.com/api/v9/channels/{channel_id}/messages/{message_id}/reactions/{emoji}/@me", headers=headers
+    )
+
+@command
+def massreact(channel_id: int, delay: int, emoji):
+    messages = get_messages(channel_id, 50)
+    
+    for msg in messages:
+        react_message(channel_id, msg['id'], emoji)
+
 @command
 def gcspam(userid: int, count: int):
     rename = input("What rename GC?:")
     delete = input("Delete GCs? (y/n):")
     
-    for i in range(int(count)):
+    def process_item(local_id, userid, rename, delete):
         try:
-            create_result = create_gc(local['id'], userid)
+            create_result = create_gc(local_id, userid)
             data = create_result.json()
             guild_id = data.get('id')
             if rename != "":
@@ -100,7 +118,9 @@ def gcspam(userid: int, count: int):
                 delete_gc(guild_id)
         except:
             print("Rate limited. Wait 5 minutes.")
-            break
+    
+    with concurrent.futures.ThreadPoolExecutor() as executor:
+        futures = [executor.submit(process_item, local['id'], userid, rename, delete) for _ in range(int(count))]
 
 spamming = False
 @command
