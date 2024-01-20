@@ -179,8 +179,9 @@ cls()
 
 statuses = data['bio']
 ordered = data['ordered']
+swap = data['statusswap']
 def status_changer():
-    while True:
+    while swap:
         if ordered:
             for i in statuses:
                 change_status("online", i)
